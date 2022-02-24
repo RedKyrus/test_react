@@ -9,8 +9,15 @@
   <title>리액트 테스트입니다</title>
 </head>
 <body>
-  <div>
-    <button></button>
-  </div>
+  <div id="root"></div>
 </body>
+<script>
+  const root = document.getElementById("root");
+  const span = React.createElement("span", {id: "id-span", style: {color: "red"}}, "Hello~~");
+  const btn = React.createElement("button", { onClick: () => {console.log("누름")}}, "click me");
+  const container = React.createElement("button", null,[span, btn]);
+  //const test = (<h3 id="test">test<h3>);
+  ReactDOM.render(test, root);
+  
+</script>
 </html>
