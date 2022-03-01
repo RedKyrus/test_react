@@ -21,18 +21,54 @@
   }
   const App = () =>{
     const [data, setData] = React.useState(0);
+    const [flipped, setFlipped] = React.useState(false);
     const onClick = () => {
       setData((current) => {
-        console.log(current)
         return current +1;
       });
+    }
+
+    const [amount, setAmount] = React.useState();
+    const onChange = (event) =>{
+      setAmount(event.target.value);
+    }
+    const reset = () => setAmount(0);
+    const onFlip = () => {
+      reset();
+      setFlipped((current) => !current);
     }
     
     return(
     <div>
       <h3 id="title"> Count: {data} </h3>
       <button type="button" onClick={onClick}> Click me</button>
+
+      <h2>단위 변환</h2>
+      <label for="minutes">분단위</label>
+      <input 
+        value = {flipped ? amount*60 : amount}
+        id="minutes"
+        type="number"
+        placeholder="minutes"
+        onChange ={onChange}
+        disabled={flipped === true}
+      />
+      <br/>
+      <label for="hours">시간단위</label>
+      <input
+        value = {flipped ? amount : Math.round(amount/60)}
+        id="hours"
+        type="number" 
+        placeholder="hours"
+        onChange ={onChange}
+        disabled={flipped === false}
+        />
+      <br/>
+      <button type="button" onClick={reset}>Reset</button>
+      <button type="button" onClick={onFlip}>Flip</button>
     </div>
+
+    
     )
   };
 
