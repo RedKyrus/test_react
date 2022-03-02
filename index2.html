@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
+  <title>리액트 테스트입니다</title>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script type="text/babel">
+  const root = document.getElementById("root");
+  
+  const MinutesToHours = () =>{
+    const [amount, setAmount] = React.useState();
+    const [flipped, setFlipped] = React.useState(false);
+    const onChange = (event) =>{
+      setAmount(event.target.value);
+    }
+    const reset = () => setAmount(0);
+    const onFlip = () => {
+      reset();
+      setFlipped((current) => !current);
+    }
+    
+    return(
+    <div>
+      <label for="minutes">분단위</label>
+      <input 
+        value = {flipped ? amount*60 : amount}
+        id="minutes"
+        type="number"
+        placeholder="minutes"
+        onChange ={onChange}
+        disabled={flipped === true}
+      />
+      <br/>
+      <label for="hours">시간단위</label>
+      <input
+        value = {flipped ? amount : Math.round(amount/60)}
+        id="hours"
+        type="number" 
+        placeholder="hours"
+        onChange ={onChange}
+        disabled={flipped === false}
+        />
+      <br/>
+      <button type="button" onClick={reset}>Reset</button>
+      <button type="button" onClick={onFlip}>Flip</button>
+    </div>
+
+    
+    )
+  };
+  const KmToMiles = () =>{
+    return(
+        <h3>Km to miles</h3>
+    )
+  }
+  const App = () =>{
+    const [index, setIndex] = React.useState("0");
+    const onSelect = (event) =>{
+      setIndex(event.target.value);
+    }
+    return(
+      <div>
+        <h2>단위 변환기</h2>
+        <select value={index} onChange={onSelect}>
+          <option value="0">시간변환</option>
+          <option value="1">거리변환</option>
+        </select>
+        {index === "0" ? <MinutesToHours/> : null}
+        {index === "1" ? <KmToMiles/> : null}
+      </div>
+
+    )
+  };
+
+  ReactDOM.render(<App/>, root);
+  
+</script>
+</html>
