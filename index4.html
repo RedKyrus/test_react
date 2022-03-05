@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js"></script> -->
+  <!-- <script src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script> -->
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
+  <title>리액트 테스트입니다</title>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script type="text/babel">
+  const root = document.getElementById("root");
+  
+  function Btn({text, fontSize, onChange}){
+    return(
+      <button
+        onClick={onChange}
+        style={{fontSize}}>
+        {text}
+      </button>
+    );
+  }
+
+  function Test({text}){
+    return(`왜 안되냐 ${text}`)
+  }
+
+  Test.propTypes = {
+    text: PropTypes.bool
+  }
+  
+
+  Btn.propTypes = {
+    text: PropTypes.string,
+    fontSize: PropTypes.number,
+  };
+
+  //const MemorizeBtn = React.memo(Btn);
+
+  const App = () =>{
+    const [value,setValue] = React.useState("버튼이어라!");
+    function changeText(){
+      setValue("변하다");
+    }
+
+
+    return(
+      <div>
+        <Btn text={value} fontSize={60} onChange={changeText} />
+        <Btn text={"18000"} fontSize={30} />
+      </div>
+
+    )
+  };
+
+  ReactDOM.render(<App/>, root);
+  
+</script>
+</html>
