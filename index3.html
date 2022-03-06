@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>리액트 테스트입니다</title>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script type="text/babel">
+  const root = document.getElementById("root");
+  function Btn({text, onClick, fSize = 16}){
+    return (
+      <button 
+        coClick={onClick}
+        style={{
+          fontSize: fSize
+      }}
+      >{text}</button>
+    )
+  }
+  const App = () =>{
+    function testClick(test){
+      console.log(test);
+    }
+    return(
+      <div>
+        <Btn text="버튼01" fSize={30} onClick={testClick("안녕")}/>
+        <Btn text="버튼테스트02"/>
+      </div>
+    )
+  };
+
+  ReactDOM.render(<App/>, root);
+  
+</script>
+</html>
